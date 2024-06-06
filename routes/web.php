@@ -7,6 +7,7 @@ use Inertia\Inertia;
 
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [TaskController::class, 'myTasks']);
     Route::get('/task', [TaskController::class, 'index'])->name('task.index');
     Route::get('/task/create', [TaskController::class, 'create'])->name('task.create');
     Route::post('/task/store', [TaskController::class, 'store'])->name('task.store');
@@ -27,9 +28,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

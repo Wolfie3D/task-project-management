@@ -48,8 +48,6 @@ class TaskController extends Controller
         }
     }
 
-
-
     /**
      * Display the specified resource.
      */
@@ -92,5 +90,15 @@ class TaskController extends Controller
     {
         $task->delete();
         return redirect()->route('task.index');
+    }
+
+
+    public function myTasks()
+    {
+        $user = auth()->user();
+        $tasks = Task::where('created_by', $user->id)->get();
+        return inertia("Dashboard", [
+            "tasks" => TaskResource::collection($tasks)
+        ]);
     }
 }
