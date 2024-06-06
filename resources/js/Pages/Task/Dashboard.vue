@@ -24,18 +24,19 @@
     "Actions",
   ];
 
+console
 </script>
 
 <template>
   <Head title="Dashboard" />
 
-  <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
+  <h2 class="font-semibold text-xl text-gray-800 leading-tight">The Dashboard</h2>
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="container mx-auto p-4">
           <Link
-            href="/dashboard"
+            href="task/dashboard"
             class="text-2xl font-bold mb-4 block"
             >Dashboard</Link
           >
@@ -61,7 +62,7 @@
               </thead>
               <tbody>
                 <tr
-                  v-for="task in tasks.data"
+                  v-for="task in tasks"
                   :key="task.id"
                   class="border-b border-gray-200"
                 >

@@ -5,9 +5,8 @@ use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [TaskController::class, 'myTasks']);
+    Route::get('/dashboard', [TaskController::class, 'myTasks'])->name('dashboard');
     Route::get('/task', [TaskController::class, 'index'])->name('task.index');
     Route::get('/task/create', [TaskController::class, 'create'])->name('task.create');
     Route::post('/task/store', [TaskController::class, 'store'])->name('task.store');
@@ -18,6 +17,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -26,6 +27,9 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/dashboard', function () {
+    return Inertia::render('Task/Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
