@@ -29,7 +29,8 @@ const deleteTask = (task) => {
 <Head title='Tasks' />
   <div class="container mx-auto p-4">
     <h2 class="text-2xl font-bold mb-4" >All Tasks</h2>
-    <div class="mb-4" ><Link href="task/create" class="text-blue-500">Create new Post</Link></div>
+    <Link Link href="/dashboard" ><h2 class="text-2xl font-bold mb-4" >Dashboard</h2></Link>
+    <div class="mb-4" ><Link href="task/create" class="text-2xl font-bold mb-4">Create new Post</Link></div>
     <div>
     <div class="overflow-x-auto">
       <table class="min-w-full">

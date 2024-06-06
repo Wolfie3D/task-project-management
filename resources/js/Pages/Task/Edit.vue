@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps, reactive } from 'vue';
-import { Head, router, Link } from '@inertiajs/vue3';
+import { Head, router, Link} from '@inertiajs/vue3';
 
 const props = defineProps({
   task: {
@@ -24,11 +24,12 @@ const form = reactive({
 const submit = () => {
   router.put(`/task/${props.task.id}`, form)
 };
+
 </script>
 
 <template>
     <div class="container mx-auto p-4">
-      <Head title="Edit Task" />
+        <Head :title="task.title" />
       <h2 class="text-2xl font-bold mb-4">Editing: "{{form.title}}"</h2>
       <form @submit.prevent="submit">
         <div class="mb-4">
@@ -85,6 +86,9 @@ const submit = () => {
           />
         </div>
 
+        <Link href="/task">
+            <span class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancel</span>
+          </Link>
 
     <button
     type="submit"
