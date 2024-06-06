@@ -18,8 +18,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-
-
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),

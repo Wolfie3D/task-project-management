@@ -97,7 +97,7 @@ class TaskController extends Controller
     {
         $user = auth()->user();
         $tasks = Task::where('created_by', $user->id)->get();
-        return inertia("Dashboard", [
+        return inertia("Task/Dashboard", [
             "tasks" => TaskResource::collection($tasks)
         ]);
     }
