@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Create 10 users
-        User::factory(15)->create()->each(function ($user) {
+        User::factory(5)->create()->each(function ($user) {
             // For each user, create 5 tasks
-            Task::factory(10)->create(['created_by' => $user->id]);
+            Task::factory(2)->create(['created_by' => $user->id]);
         });
     }
 }
