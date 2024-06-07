@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Models\User;
 use Inertia\Inertia;
 use App\Http\Resources\TaskResource;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 
@@ -18,9 +19,13 @@ class TaskController extends Controller
     {
         $tasks = Task::orderBy('created_at', 'desc')->get();
 
-        return Inertia::render("Task/Index", [
-            "tasks" => TaskResource::collection($tasks)->response()->getData(true),
-        ]);
+        if (auth()->user()->role == 'admin') {
+            return Inertia::render("Task/Index", [
+                "tasks" => TaskResource::collection($tasks)->response()->getData(true),
+            ]);
+        } else {
+            return redirect()->route('task.myTask');
+        }
     }
 
     /**
@@ -68,7 +73,7 @@ class TaskController extends Controller
             'Task/Edit',
             [
                 'task' => new TaskResource($task),
-                'users' => $users,
+                'users' => $users
             ]
         );
     }
@@ -80,8 +85,14 @@ class TaskController extends Controller
     {
         $data = $request->validated();
         $task->update($data);
-        return redirect()->route('task.index');
+
+        if (auth()->user()->role == 'admin') {
+            return redirect()->route('task.index');
+        } else {
+            return redirect()->route('task.myTask');
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -93,12 +104,12 @@ class TaskController extends Controller
     }
 
 
-    public function myTasks()
+    public function myTask()
     {
-        $user = auth()->user();
-        $tasks = Task::where('created_by', $user->id)->get();
-        return inertia("Task/Dashboard", [
-            "tasks" => TaskResource::collection($tasks)
+        $user = Auth::user();
+        $userTasks = Task::where('assigned_to', $user->id)->get();
+        return Inertia::render('Task/Staff/Dashboard', [
+            'myTasks' => $userTasks,
         ]);
     }
 }

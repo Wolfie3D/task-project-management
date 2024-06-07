@@ -25,7 +25,7 @@ class TaskResource extends JsonResource
             'description' => $this->description,
             'status' => $this->status,
             'due_date' => (new Carbon($this->due_date))->format('Y-m-d'),
-            'created_by' => new UserResource($this->createdBy),
+            'assigned_to' => new UserResource($this->createdBy),
         ];
     }
 }

@@ -25,7 +25,7 @@ class StoreTaskRequest extends FormRequest
         return [
             'status' => ['required', Rule::in(['pending', 'in_progress', 'completed'])],
 
-            'created_by' => ['required', 'exists:users,id'],
+            'assigned_to' => ['required', 'exists:users,id'],
 
             'due_date' => ['nullable', 'date'],
 

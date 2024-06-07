@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         // Create 10 users
         User::factory(5)->create()->each(function ($user) {
             // For each user, create 5 tasks
-            Task::factory(2)->create(['created_by' => $user->id]);
+            Task::factory(2)->create(['assigned_to' => $user->id]);
         });
     }
 }
